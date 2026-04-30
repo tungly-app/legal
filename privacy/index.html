@@ -6,13 +6,13 @@
     <title>Privacy Policy for Tungly</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; color: #333; }
-        h1, h2 { color: #2c3e50; }
+        h1, h2, h3 { color: #2c3e50; }
         ul { margin-bottom: 20px; }
         a { color: #3498db; }
-        /* Simple Dark Mode Support */
+        
         @media (prefers-color-scheme: dark) {
             body { background-color: #121212; color: #e0e0e0; }
-            h1, h2 { color: #ffffff; }
+            h1, h2, h3 { color: #ffffff; }
             a { color: #bb86fc; }
         }
     </style>
@@ -20,44 +20,66 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> [Current Date]</p>
+    <p><strong>Last updated:</strong> 2026-04-30</p>
 
-    <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by [Your Name or Company Name] and is intended for use as is.</p>
+    <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong>. You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, and how you can request its deletion.</p>
 
-    <h2>1. Information Collection and Use</h2>
-    <p>To provide a better experience, we may require you to provide us with certain information. The information that we request will be retained on your device and is not collected by us in any way, except as described in this privacy policy.</p>
+    <h2>1. Information We Collect and Use</h2>
 
-    <h3>A. User Input & AI Processing</h3>
-    <p>Tungly uses artificial intelligence to generate translations, examples, and grammatical explanations.</p>
+    <h3>A. Account Information (Optional — Firebase Authentication / Google Sign-In)</h3>
+    <p>Tungly does not require an account to use. If you have an active <strong>Full Experience</strong> subscription, you may choose to sign in with a Google account to enable Cloud Sync. When you sign in, Google provides us with:</p>
     <ul>
-        <li><strong>Google Gemini API:</strong> When you enter a word or phrase for analysis, that text is sent to Google's Gemini API for processing. We do not send any personal identifiers (like your name or email) with this data. The text is used solely to generate the learning content you requested.</li>
+        <li>Your <strong>Firebase UID</strong> — a unique identifier for your account within the app.</li>
+        <li>Your <strong>email address</strong> and <strong>display name</strong> as registered with your Google account.</li>
+    </ul>
+    <p>This information is handled by <strong>Firebase Authentication</strong> (Google) and is used to associate your synced learning content with your account. If your Full Experience subscription ends, the app automatically signs you out and stops syncing your cards.</p>
+
+    <h3>B. Learning Content You Create</h3>
+    <p>How your cards are stored depends on whether you are signed in:</p>
+    <ul>
+        <li><strong>Without sign-in (default):</strong> Your cards and learning progress are stored only on your device, in a local database. They are not associated with any account on our servers, and uninstalling the app removes them.</li>
+        <li><strong>While signed in (Cloud Sync, Full Experience only):</strong> Your cards and learning progress are also saved to <strong>Google Cloud Firestore</strong> under your Firebase UID. This includes the original word or phrase you entered, the AI-generated translation, transcriptions and examples, your favorite/known flags, your sequential-known count, and the timestamps for when you added and last interacted with each card. Sync happens both immediately when you create or update a card and periodically in the background via Android WorkManager.</li>
+    </ul>
+    <p><strong>Shared translation cache (all users):</strong> When you look up a new word or phrase, the original input together with its AI-generated translation, transcriptions, and example sentence is also saved to a <strong>shared collection</strong> in Cloud Firestore. This lets us avoid re-running the AI for the same lookup another user has already made. This shared entry is keyed by the language pair and the input text only — it is <strong>not linked to your account, device, or any other identifier</strong>. This happens whether or not you are signed in.</p>
+
+    <h3>C. AI Processing (Google Gemini via Firebase AI)</h3>
+    <p>When you enter a word or phrase for analysis, that text and your target language code are sent to <strong>Google's Gemini API</strong> (via Firebase AI) for processing. We do <strong>not</strong> send your account UID, email, or any other personal identifier alongside this request. The text is used solely to generate the learning card you requested.</p>
+
+    <h3>D. Diagnostics and Usage (Firebase Crashlytics and Firebase Analytics)</h3>
+    <p>To help us identify bugs and improve the app, we use:</p>
+    <ul>
+        <li><strong>Firebase Crashlytics:</strong> If the app crashes or encounters an error, a crash report including details about the error and your device is sent to Firebase Crashlytics.</li>
+        <li><strong>Firebase Analytics:</strong> We log in-app events (such as sync failures) and user properties (such as whether you have an active Full Experience subscription and your authentication state).</li>
+    </ul>
+    <p>If you are signed in, these reports are tagged with your Firebase UID; if you are not signed in, they are tagged as anonymous. Both services are provided by Google. No human-readable card text or word lookups are included in these reports.</p>
+
+    <h3>E. Subscriptions and Payments (RevenueCat and Google Play)</h3>
+    <p>We do not process payments directly. All transactions are handled securely by <strong>Google Play</strong>.</p>
+    <ul>
+        <li><strong>RevenueCat:</strong> We use RevenueCat to manage subscription status. RevenueCat is configured to use an <strong>anonymous device identifier</strong> — we do not pass your Firebase UID, email, or name to RevenueCat. We do not share your personal billing details with RevenueCat.</li>
     </ul>
 
-    <h3>B. Subscriptions & Payments</h3>
-    <p>We do not process payments directly. All transactions are handled securely by Google Play.</p>
-    <ul>
-        <li><strong>RevenueCat:</strong> We use a service called RevenueCat to manage subscription status. RevenueCat generates an anonymous identifier for your device to track whether you have an active "Pro" subscription. We do not share your personal billing details with RevenueCat.</li>
-    </ul>
-
-    <h3>C. Log Data</h3>
-    <p>In a case of an error in the app, we may collect data and information (through third-party products like Google Play Services) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol ("IP") address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.</p>
-
-    <h2>2. Third Party Services</h2>
-    <p>The app does use third-party services that may collect information used to identify you. Link to privacy policy of third-party service providers used by the app:</p>
+    <h2>2. Third-Party Services</h2>
+    <p>The app uses third-party services that may collect information used to identify you. Links to the privacy policies of these providers:</p>
     <ul>
         <li><a href="https://policies.google.com/privacy" target="_blank">Google Play Services</a></li>
+        <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a></li>
         <li><a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat</a></li>
-        <li><a href="https://policies.google.com/privacy" target="_blank">Google Gemini (Google Cloud)</a></li>
     </ul>
 
-    <h2>3. Children’s Privacy</h2>
-    <p>These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13.</p>
+    <h2>3. Data Retention and Deletion</h2>
+    <p><strong>If you have never signed in:</strong> all of your learning data lives only on your device. Uninstalling the app removes it.</p>
+    <p><strong>If you have signed in to use Cloud Sync:</strong> your account-linked data (learning cards, progress, and account information) persists in Cloud Firestore until you request its deletion. Deleting the Tungly app from your device does <strong>not</strong> delete your cloud data. To request deletion of your account and all associated data, email us at <strong>tungly2025@gmail.com</strong> with the subject "Account Deletion Request." We will process your request and confirm deletion.</p>
+    <p><strong>Shared translation cache:</strong> Entries in the shared collection contain only the input text and its AI-generated translation, with no identifier linking them to you, so individual deletion is not applicable.</p>
 
-    <h2>4. Changes to This Privacy Policy</h2>
-    <p>We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+    <h2>4. Children's Privacy</h2>
+    <p>This Service is not directed at children. If you choose to sign in, you must meet the minimum age required by Google in your country to create and use a Google account. We do not knowingly collect personally identifiable information from anyone who does not meet that age requirement. If you believe a minor has provided us with personal information, please contact us so we can remove it.</p>
 
-    <h2>5. Contact Us</h2>
-    <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <strong>[Your Support Email Address]</strong>.</p>
+    <h2>5. Changes to This Privacy Policy</h2>
+    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this page periodically for any changes.</p>
+
+    <h2>6. Contact Us</h2>
+    <p>If you have any questions or suggestions about our Privacy Policy, please contact us at <strong>tungly2025@gmail.com</strong>.</p>
 
 </body>
 </html>
