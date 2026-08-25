@@ -9,20 +9,29 @@
         h1, h2, h3 { color: #2c3e50; }
         ul { margin-bottom: 20px; }
         a { color: #3498db; }
-        
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f7fa; }
+        .todo { background: #ffe066; color: #663c00; padding: 0 4px; font-weight: bold; }
+
         @media (prefers-color-scheme: dark) {
             body { background-color: #121212; color: #e0e0e0; }
             h1, h2, h3 { color: #ffffff; }
             a { color: #bb86fc; }
+            th, td { border-color: #444; }
+            th { background: #1e1e1e; }
+            .todo { background: #7a5c00; color: #ffe9a8; }
         }
     </style>
 </head>
 <body>
 
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> 2026-04-30</p>
+    <p><strong>Last updated:</strong> 2026-08-24</p>
 
-    <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong>. You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, and how you can request its deletion.</p>
+    <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong> ("we", "us"). You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, how long we keep it, and what rights you have over it.</p>
+
+    <p><strong>The short version.</strong> Your cards live on your device by default. Words and phrases you look up are sent to Google's Gemini AI for translation, and the result — including the text you entered — is stored in a shared collection that other Tungly users draw on, without any link to you. If you sign in, your learning progress also syncs to the cloud under your account. We show ads to users without a subscription. We do not sell your data.</p>
 
     <h2>1. Information We Collect and Use</h2>
 
@@ -32,54 +41,112 @@
         <li>Your <strong>Firebase UID</strong> — a unique identifier for your account within the app.</li>
         <li>Your <strong>email address</strong> and <strong>display name</strong> as registered with your Google account.</li>
     </ul>
-    <p>This information is handled by <strong>Firebase Authentication</strong> (Google) and is used to associate your synced learning content with your account. If your Full Experience subscription ends, the app automatically signs you out and stops syncing your cards.</p>
+    <p>This information is handled by <strong>Firebase Authentication</strong> (Google) and is used to associate your synced learning content with your account. Firebase Authentication may hold additional profile information from your Google account (such as your profile photo URL) on Google's servers as part of maintaining the sign-in record, even where the app itself does not read or display it.</p>
+    <p>If your Full Experience subscription ends, the app automatically signs you out and stops syncing your cards. <strong>Your data already in the cloud is not deleted when this happens</strong> — see section 3.</p>
 
     <h3>B. Learning Content You Create</h3>
     <p>How your cards are stored depends on whether you are signed in:</p>
     <ul>
         <li><strong>Without sign-in (default):</strong> Your cards and learning progress are stored only on your device, in a local database. They are not associated with any account on our servers, and uninstalling the app removes them.</li>
-        <li><strong>While signed in (Cloud Sync, Full Experience only):</strong> Your cards and learning progress are also saved to <strong>Google Cloud Firestore</strong> under your Firebase UID. This includes the original word or phrase you entered, the AI-generated translation, transcriptions and examples, your favorite/known flags, your sequential-known count, and the timestamps for when you added and last interacted with each card. Sync happens both immediately when you create or update a card and periodically in the background via Android WorkManager.</li>
+        <li><strong>While signed in (Cloud Sync, Full Experience only):</strong> Your learning progress is also saved to <strong>Google Cloud Firestore</strong> under your Firebase UID. These records consist of references to entries in the shared collection described below, together with your progress data: your favourite and known flags, your sequential-known count, the number of entries you have imported, and the timestamps for when you added and last interacted with each card. Sync happens both immediately when you create or update a card and periodically in the background (roughly every six hours) via Android WorkManager, including when the app is not open.</li>
     </ul>
-    <p><strong>Shared translation cache (all users):</strong> When you look up a new word or phrase, the original input together with its AI-generated translation, transcriptions, and example sentence is also saved to a <strong>shared collection</strong> in Cloud Firestore. This lets us avoid re-running the AI for the same lookup another user has already made. This shared entry is keyed by the language pair and the input text only — it is <strong>not linked to your account, device, or any other identifier</strong>. This happens whether or not you are signed in.</p>
+
+    <p><strong>Shared translation collection — please read this carefully.</strong> When you look up a word or phrase that no one has looked up before in that language pair, we send it to Google's Gemini AI (see section C) and then store the result — <strong>including the original text you entered</strong> — in a collection in Cloud Firestore that is shared across all Tungly users. When another user later enters the same word in the same language pair, they are served your stored entry instead of us re-running the AI. This is what keeps the app fast and affordable to run.</p>
+    <ul>
+        <li>The shared entry is keyed by the language pair and the input text only. It is <strong>not linked to your account, device, IP address, or any other identifier</strong>, and it carries nothing that would let us or anyone else trace it back to you.</li>
+        <li><strong>This happens whether or not you are signed in</strong>, and on both the free and paid tiers.</li>
+        <li>Entries in the shared collection are <strong>retained indefinitely</strong> and are readable by other users of the app.</li>
+        <li><strong>Because of this, please do not enter personal information</strong> — names, addresses, account numbers, health details, or anything else private — into the app. Tungly is a vocabulary tool; treat what you type as public.</li>
+    </ul>
+    <p>If you believe a shared entry contains personal information or content that should not be there, email us at <strong>tungly2025@gmail.com</strong> with the word or phrase and the language pair, and we will remove it. Because these entries carry no identifier, we cannot locate them from your account alone — we need the text itself.</p>
 
     <h3>C. AI Processing (Google Gemini via Firebase AI)</h3>
-    <p>When you enter a word or phrase for analysis, that text and your target language code are sent to <strong>Google's Gemini API</strong> (via Firebase AI) for processing. We do <strong>not</strong> send your account UID, email, or any other personal identifier alongside this request. The text is used solely to generate the learning card you requested.</p>
+    <p>When you enter a word or phrase for analysis, that text and your target language code are sent to <strong>Google's Gemini API</strong> (via Firebase AI Logic, using the Gemini Developer API) for processing. The model currently used is a Gemini Flash model. We do <strong>not</strong> send your account UID, email, or any other personal identifier alongside this request. The text is used to generate the learning card you requested, and the generated result is then stored in the shared collection described in section B.</p>
 
     <h3>D. Diagnostics and Usage (Firebase Crashlytics and Firebase Analytics)</h3>
     <p>To help us identify bugs and improve the app, we use:</p>
     <ul>
-        <li><strong>Firebase Crashlytics:</strong> If the app crashes or encounters an error, a crash report including details about the error and your device is sent to Firebase Crashlytics.</li>
-        <li><strong>Firebase Analytics:</strong> We log in-app events (such as sync failures) and user properties (such as whether you have an active Full Experience subscription and your authentication state).</li>
+        <li><strong>Firebase Crashlytics:</strong> If the app crashes or encounters an error, a crash report is sent to Firebase Crashlytics. This includes the error and stack trace, your device model, operating system version, app version, and your IP address. It also includes a short trail of recent in-app diagnostic messages leading up to the error. <strong>Those diagnostic messages may include the word or phrase being processed at the time</strong>, along with your Firebase UID and your subscription status. We are working to remove user-entered text from these reports; until then, we would rather tell you it is there than claim otherwise.</li>
+        <li><strong>Firebase Analytics:</strong> We log in-app events — such as sync successes and failures, settings changes, starting an import, generating a PDF export, and counts of how many translations came from the shared collection versus the AI. We also set user properties recording whether you have an active Full Experience subscription and whether you are signed in. Firebase Analytics additionally collects certain information automatically, including an app instance identifier, device and operating system details, and an approximate location derived from your IP address.</li>
     </ul>
-    <p>If you are signed in, these reports are tagged with your Firebase UID; if you are not signed in, they are tagged as anonymous. Both services are provided by Google. No human-readable card text or word lookups are included in these reports.</p>
+    <p>Analytics events record counts and labels only — the words and phrases you enter are not included in them. If you are signed in, these reports are tagged with your Firebase UID; if you are not signed in, they are tagged as anonymous. Both services are provided by Google.</p>
 
     <h3>E. Subscriptions and Payments (RevenueCat and Google Play)</h3>
-    <p>We do not process payments directly. All transactions are handled securely by <strong>Google Play</strong>.</p>
+    <p>We do not process payments directly. All transactions are handled securely by <strong>Google Play</strong>, and we never receive your card or billing details.</p>
     <ul>
-        <li><strong>RevenueCat:</strong> We use RevenueCat to manage subscription status. RevenueCat is configured to use an <strong>anonymous device identifier</strong> — we do not pass your Firebase UID, email, or name to RevenueCat. We do not share your personal billing details with RevenueCat.</li>
+        <li><strong>RevenueCat:</strong> We use RevenueCat to manage subscription status. RevenueCat is configured to use an <strong>anonymous device identifier</strong> — we do not pass your Firebase UID, email, or name to RevenueCat. It receives your purchase and subscription history for the app in order to tell us whether your subscription is active.</li>
     </ul>
+
+    <h3>F. Advertising (Google AdMob)</h3>
+    <p>Tungly is free to use, and we cover part of the cost by showing ads. If you do not have an active Full Experience subscription, the app may display banner advertising supplied by <strong>Google AdMob</strong>. A Full Experience subscription removes all advertising.</p>
+    <ul>
+        <li>The advertising SDK is initialised when the app starts, and may collect your <strong>Advertising ID</strong> (a resettable identifier provided by Android), your IP address, device and operating system information, and information about your interaction with ads.</li>
+        <li>The app declares the Android <strong>Privacy Sandbox</strong> permissions (Topics and Attribution) used by Google's advertising libraries.</li>
+        <li><strong>Ads may be personalised</strong> based on this information. Google acts as an independent controller for the advertising data it collects; see <a href="https://business.safety.google/privacy/">how Google uses information from sites or apps that use its services</a>.</li>
+        <li>You can reset or delete your Advertising ID, and turn off ad personalisation, in your Android device settings under <em>Settings → Privacy → Ads</em>. You can remove advertising from the app entirely by subscribing to Full Experience.</li>
+    </ul>
+    <p>We do not sell your personal information. Where personalised advertising counts as "sharing" or a "sale" under laws such as the California Consumer Privacy Act, see section 4.</p>
 
     <h2>2. Third-Party Services</h2>
     <p>The app uses third-party services that may collect information used to identify you. Links to the privacy policies of these providers:</p>
     <ul>
-        <li><a href="https://policies.google.com/privacy" target="_blank">Google Play Services</a></li>
-        <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a></li>
-        <li><a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat</a></li>
+        <li><a href="https://policies.google.com/privacy">Google Play Services</a></li>
+        <li><a href="https://firebase.google.com/support/privacy">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
+        <li><a href="https://support.google.com/admob/answer/6128543">Google AdMob</a> — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
+        <li><a href="https://www.revenuecat.com/privacy">RevenueCat</a></li>
     </ul>
 
     <h2>3. Data Retention and Deletion</h2>
-    <p><strong>If you have never signed in:</strong> all of your learning data lives only on your device. Uninstalling the app removes it.</p>
-    <p><strong>If you have signed in to use Cloud Sync:</strong> your account-linked data (learning cards, progress, and account information) persists in Cloud Firestore until you request its deletion. Deleting the Tungly app from your device does <strong>not</strong> delete your cloud data. To request deletion of your account and all associated data, email us at <strong>tungly2025@gmail.com</strong> with the subject "Account Deletion Request." We will process your request and confirm deletion.</p>
-    <p><strong>Shared translation cache:</strong> Entries in the shared collection contain only the input text and its AI-generated translation, with no identifier linking them to you, so individual deletion is not applicable.</p>
+    <table>
+        <tr><th>What</th><th>Where</th><th>How long</th></tr>
+        <tr><td>Cards and progress, if you have never signed in</td><td>Your device only</td><td>Until you uninstall the app or clear its data</td></tr>
+        <tr><td>Account information and synced progress</td><td>Cloud Firestore + Firebase Authentication</td><td>Until you ask us to delete it</td></tr>
+        <tr><td>Shared translation entries (input text + AI translation, no identifier)</td><td>Cloud Firestore, shared across users</td><td>Indefinitely</td></tr>
+        <tr><td>Crash reports and diagnostics</td><td>Firebase Crashlytics</td><td>Per Google's standard Crashlytics retention</td></tr>
+        <tr><td>Analytics events and user properties</td><td>Firebase Analytics</td><td>Per the retention period configured for our Firebase project</td></tr>
+        <tr><td>Purchase and subscription history</td><td>RevenueCat, Google Play</td><td>Per those providers' own policies</td></tr>
+    </table>
 
-    <h2>4. Children's Privacy</h2>
-    <p>This Service is not directed at children. If you choose to sign in, you must meet the minimum age required by Google in your country to create and use a Google account. We do not knowingly collect personally identifiable information from anyone who does not meet that age requirement. If you believe a minor has provided us with personal information, please contact us so we can remove it.</p>
+    <p><strong>Deleting the Tungly app from your device does not delete your cloud data</strong>, and neither does letting your subscription lapse. If your subscription becomes inactive, the app signs you out and stops syncing, but your account and the data already in the cloud remain until you ask us to remove them.</p>
 
-    <h2>5. Changes to This Privacy Policy</h2>
-    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this page periodically for any changes.</p>
+    <p><strong>To delete your account and associated data, see our <a href="../delete-account/">Account Deletion page</a></strong>, or email <strong>tungly2025@gmail.com</strong> with the subject "Account Deletion Request". We will confirm once the deletion is complete.</p>
 
-    <h2>6. Contact Us</h2>
-    <p>If you have any questions or suggestions about our Privacy Policy, please contact us at <strong>tungly2025@gmail.com</strong>.</p>
+    <p>Entries in the shared translation collection carry no identifier linking them to you, so they are not removed as part of an account deletion. If a specific entry needs to be removed, tell us the text and language pair as described in section 1.B and we will delete it.</p>
+
+    <h2>4. Your Rights</h2>
+
+    <p>You can ask us to give you a copy of your data, correct it, or delete it, wherever you live, by emailing <strong>tungly2025@gmail.com</strong>. We do not charge for this and we will not treat you differently for asking. Some additional rights apply depending on where you are.</p>
+
+    <h3>Canada (PIPEDA) and Quebec (Law 25)</h3>
+    <p>Isotropy is based in Canada. Under the <em>Personal Information Protection and Electronic Documents Act</em> you have the right to access the personal information we hold about you, to ask us to correct it, and to challenge our handling of it. If you are not satisfied with our response, you may complain to the <a href="https://www.priv.gc.ca/">Office of the Privacy Commissioner of Canada</a>.</p>
+    <p>If you are a Quebec resident, Law 25 additionally gives you the right to receive your data in a structured, commonly used technological format, and to ask us to stop disseminating personal information or to de-index it where its dissemination causes you injury. Our privacy officer can be reached at the contact details in section 7.</p>
+
+    <h3>European Economic Area and United Kingdom (GDPR / UK GDPR)</h3>
+    <p>Where the GDPR applies, Isotropy is the controller of your personal data. We rely on the following legal bases:</p>
+    <table>
+        <tr><th>Purpose</th><th>Legal basis</th></tr>
+        <tr><td>Providing the app, generating cards, Cloud Sync, and managing your subscription</td><td>Performance of a contract (Art. 6(1)(b))</td></tr>
+        <tr><td>Maintaining the shared translation collection so lookups are fast and affordable</td><td>Legitimate interests (Art. 6(1)(f))</td></tr>
+        <tr><td>Crash reporting and diagnostics needed to keep the app working</td><td>Legitimate interests (Art. 6(1)(f))</td></tr>
+        <tr><td>Analytics and personalised advertising</td><td>Consent (Art. 6(1)(a)), where required by local law</td></tr>
+    </table>
+    <p>You have the right to access, rectification, erasure, restriction of processing, data portability, and to object to processing carried out on the basis of legitimate interests — including profiling for advertising. Where we rely on consent, you may withdraw it at any time without affecting processing already carried out. You also have the right to lodge a complaint with your national supervisory authority.</p>
+    <p>Our providers (Google and RevenueCat) process data outside the EEA and the UK, including in the United States. Those transfers rely on the transfer mechanisms operated by those providers, principally the European Commission's Standard Contractual Clauses and, where applicable, adequacy decisions such as the EU–US Data Privacy Framework.</p>
+
+    <h3>California (CCPA / CPRA)</h3>
+    <p>In the past twelve months we have collected the following categories of personal information: identifiers (Firebase UID, email address, display name, Advertising ID, IP address); commercial information (subscription and purchase history); internet or other network activity (in-app events, crash diagnostics); coarse geolocation inferred from IP address; and user-generated content (the words and phrases you enter). The sources, purposes, and recipients are described in section 1.</p>
+    <p><strong>We do not sell your personal information for money.</strong> However, allowing Google AdMob to serve personalised advertising may constitute "sharing" for cross-context behavioural advertising under the CPRA. You can stop this by turning off ad personalisation in your Android settings, or by subscribing to Full Experience, which removes advertising entirely. You may also contact us to opt out.</p>
+    <p>You have the right to know, delete, and correct your personal information, to opt out of sharing for cross-context behavioural advertising, and not to be discriminated against for exercising these rights.</p>
+
+    <h2>5. Children's Privacy</h2>
+    <p>This Service is not directed at children and we do not knowingly collect personal information from them. You must be at least 13 years old — or older, where your country sets a higher minimum age for consent to online services — to use Tungly. If you choose to sign in, you must additionally meet the minimum age required by Google in your country to hold a Google account. If you believe a child has provided us with personal information, contact us and we will remove it.</p>
+
+    <h2>6. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will post the new version on this page and update the "Last updated" date above. Where a change materially affects how we handle your data, we will make reasonable efforts to bring it to your attention in the app. You are advised to review this page periodically.</p>
+
+    <h2>7. Who We Are and How to Contact Us</h2>
+    <p>The Service is operated by <strong>Isotropy</strong>, <span class="todo">[FILL IN: registered legal name and entity type]</span>, of <span class="todo">[FILL IN: street address, city, province, postal code]</span>, Canada.</p>
+    <p>For any privacy question, request, or complaint — including access, correction, deletion, and portability requests, and matters for our privacy officer under Quebec Law 25 — contact us at <strong>tungly2025@gmail.com</strong>.</p>
 
 </body>
 </html>

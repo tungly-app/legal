@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Your Tungly Account</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        ul, ol { margin-bottom: 20px; }
+        a { color: #3498db; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f5f7fa; }
+        .box { border-left: 4px solid #3498db; background: #f5f9fc; padding: 12px 16px; margin-bottom: 20px; }
+
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212; color: #e0e0e0; }
+            h1, h2, h3 { color: #ffffff; }
+            a { color: #bb86fc; }
+            th, td { border-color: #444; }
+            th { background: #1e1e1e; }
+            .box { border-left-color: #bb86fc; background: #1a1a1a; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Delete Your Tungly Account</h1>
+    <p><strong>Last updated:</strong> 2026-08-24</p>
+
+    <p>This page explains how to delete your <strong>Tungly</strong> account and the data associated with it. Tungly is published by <strong>Isotropy</strong>; the app's package name is <code>com.isotropy.tungly</code>.</p>
+
+    <div class="box">
+        <p><strong>You do not need an account to use Tungly.</strong> If you have never signed in with Google, there is nothing on our servers tied to you — your cards live only on your device. Uninstalling the app, or clearing its data in Android Settings, removes them completely. Nothing on this page is needed.</p>
+    </div>
+
+    <h2>In the app</h2>
+    <p>From Tungly <strong>1.0</strong> onwards: open <strong>Settings &rarr; Delete Account</strong>. You will be asked to sign in first so we can confirm the account is yours, then the deletion runs immediately. This works even if your subscription has lapsed and the app has signed you out.</p>
+
+    <h2>By email</h2>
+    <p>If you have already uninstalled the app, or are on an older version, email <strong>tungly2025@gmail.com</strong> with:</p>
+    <ol>
+        <li>the subject line <strong>"Account Deletion Request"</strong>;</li>
+        <li>the <strong>Google account email address</strong> you used to sign in to Tungly.</li>
+    </ol>
+    <p>Please send the request from that same email address where you can, so we can confirm it is yours. We will action the request and email you when it is done.</p>
+
+    <h2>What gets deleted</h2>
+    <table>
+        <tr><th>Data</th><th>Outcome</th></tr>
+        <tr><td>Your account record (Firebase Authentication) — Firebase UID, email address, display name</td><td><strong>Deleted</strong></td></tr>
+        <tr><td>Your synced learning data in Cloud Firestore — card references, favourite and known flags, progress counts, import counter, timestamps</td><td><strong>Deleted</strong></td></tr>
+        <tr><td>Cards stored locally on your device</td><td>Removed by uninstalling the app or clearing its data — this is under your control, not ours</td></tr>
+        <tr><td>Crash reports and analytics events already collected</td><td>Deleted or de-identified in line with the retention periods in our <a href="../privacy/">Privacy Policy</a></td></tr>
+        <tr><td>Purchase and subscription history held by Google Play and RevenueCat</td><td>Retained by those providers under their own policies and applicable tax and accounting law — we cannot delete it on your behalf</td></tr>
+    </table>
+
+    <h2>What is kept, and why</h2>
+    <p>Entries in Tungly's <strong>shared translation collection</strong> are not deleted with your account. When a word or phrase is looked up for the first time, the text and its AI-generated translation are stored so that other users entering the same word do not trigger a new AI request. <strong>These entries carry no identifier of any kind linking them to you</strong> — no account, no device, no IP address — so they cannot be located from your account, and they are indistinguishable from entries created by anyone else.</p>
+    <p>If a specific entry contains personal information or content that should not be there, tell us the exact word or phrase and the language pair, and we will remove that entry.</p>
+
+    <h2>Timing</h2>
+    <p>We aim to complete deletion requests within <strong>30 days</strong>. Backups held by our infrastructure provider may retain copies for a short additional period before they expire on their normal cycle.</p>
+
+    <h2>A note on subscriptions</h2>
+    <p><strong>Deleting your account does not cancel your subscription.</strong> Subscriptions are managed by Google Play — cancel yours in the Play Store under <em>Subscriptions</em> before or after requesting deletion. Note also that if your subscription lapses, the app signs you out automatically; your cloud data is <em>not</em> deleted at that point, and this page remains the way to remove it.</p>
+
+    <h2>Other privacy requests</h2>
+    <p>You can also ask for a copy of your data, or ask us to correct it, at the same address. See the <a href="../privacy/">Privacy Policy</a> for the full set of rights that apply where you live.</p>
+
+    <hr>
+    <p><a href="../">Tungly Legal</a> &middot; <a href="../privacy/">Privacy Policy</a> &middot; <a href="../terms/">Terms and Conditions</a></p>
+
+</body>
+</html>
