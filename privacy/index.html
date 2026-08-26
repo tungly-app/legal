@@ -27,11 +27,11 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> 2026-08-25</p>
+    <p><strong>Last updated:</strong> 2026-08-26</p>
 
     <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong> ("we", "us"). You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, how long we keep it, and what rights you have over it.</p>
 
-    <p><strong>The short version.</strong> Your cards live on your device by default. Words and phrases you look up are sent to Google's Gemini AI for translation, and the result — including the text you entered — is stored in a shared collection that other Tungly users draw on, without any link to you. If you sign in, your learning progress also syncs to the cloud under your account. We show ads to users without a subscription. We do not sell your data.</p>
+    <p><strong>The short version.</strong> Your cards live on your device by default. Words and phrases you look up are sent to Google's Gemini AI for translation, and the result — including the text you entered — is stored in a shared collection that other Tungly users draw on, without any link to you. If you sign in, your learning progress also syncs to the cloud under your account. <strong>As of app version 1.0 the app shows no advertising</strong>, although your Advertising ID still reaches Google through analytics — see section 1.F. We do not sell your data.</p>
 
     <h2>1. Information We Collect and Use</h2>
 
@@ -77,22 +77,24 @@
         <li><strong>RevenueCat:</strong> We use RevenueCat to manage subscription status. RevenueCat is configured to use an <strong>anonymous device identifier</strong> — we do not pass your Firebase UID, email, or name to RevenueCat. It receives your purchase and subscription history for the app in order to tell us whether your subscription is active.</li>
     </ul>
 
-    <h3>F. Advertising (Google AdMob)</h3>
-    <p>Tungly is free to use, and we cover part of the cost by showing ads. If you do not have an active Full Experience subscription, the app may display banner advertising supplied by <strong>Google AdMob</strong>. A Full Experience subscription removes all advertising.</p>
+    <h3>F. Advertising and your Advertising ID</h3>
+    <p><strong>As of app version 1.0, Tungly displays no advertising to anyone</strong>, on the free tier or the paid one. The ad units are switched off in the app and the Google Mobile Ads SDK is never started. On versions before 1.0, users without an active Full Experience subscription could be shown banner advertising supplied by <strong>Google AdMob</strong>.</p>
+    <p><strong>Your Advertising ID still reaches Google, even with no ads shown.</strong> This is the part most likely to surprise you, so we would rather state it plainly than let the absence of ads imply more than it should.</p>
     <ul>
-        <li>The advertising SDK is initialised when the app starts, and may collect your <strong>Advertising ID</strong> (a resettable identifier provided by Android), your IP address, device and operating system information, and information about your interaction with ads.</li>
-        <li>The app declares the Android <strong>Privacy Sandbox</strong> permissions (Topics and Attribution) used by Google's advertising libraries.</li>
-        <li><strong>Ads may be personalised</strong> based on this information. Google acts as an independent controller for the advertising data it collects; see <a href="https://business.safety.google/privacy/">how Google uses information from sites or apps that use its services</a>.</li>
-        <li>You can reset or delete your Advertising ID, and turn off ad personalisation, in your Android device settings under <em>Settings → Privacy → Ads</em>. You can remove advertising from the app entirely by subscribing to Full Experience.</li>
+        <li><strong>Firebase Analytics reads your Advertising ID</strong> — a resettable identifier provided by Android — and sends it to Google alongside the events described in section 1.D, together with your IP address and device and operating system information. This happens because of analytics, not because of ads, so it is not affected by whether you subscribe.</li>
+        <li><strong>Google may use it for advertising purposes</strong>, including ad personalisation and measurement across apps and sites. Google acts as an independent controller for that data; see <a href="https://business.safety.google/privacy/">how Google uses information from sites or apps that use its services</a>.</li>
+        <li>The Google Mobile Ads SDK is <strong>still bundled</strong> in the app even though it never runs. That is why the app continues to declare the Android Advertising ID and <strong>Privacy Sandbox</strong> (Topics and Attribution) permissions. In version 1.0 the SDK is inert: it is not initialised, requests no ads, and collects nothing.</li>
+        <li>You can reset or delete your Advertising ID, and turn off ad personalisation, in your Android device settings under <em>Settings → Privacy → Ads</em>. This is the effective control, and it works whether or not you subscribe.</li>
     </ul>
-    <p>We do not sell your personal information. Where personalised advertising counts as "sharing" or a "sale" under laws such as the California Consumer Privacy Act, see section 4.</p>
+    <p>A future version may reintroduce banner advertising for users without a Full Experience subscription. If it does, we will update this section and the "Last updated" date above before that version ships.</p>
+    <p>We do not sell your personal information. Where advertising identifiers count as "sharing" or a "sale" under laws such as the California Consumer Privacy Act, see section 4.</p>
 
     <h2>2. Third-Party Services</h2>
     <p>The app uses third-party services that may collect information used to identify you. Links to the privacy policies of these providers:</p>
     <ul>
         <li><a href="https://policies.google.com/privacy">Google Play Services</a></li>
         <li><a href="https://firebase.google.com/support/privacy">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
-        <li><a href="https://support.google.com/admob/answer/6128543">Google AdMob</a> — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
+        <li><a href="https://support.google.com/admob/answer/6128543">Google AdMob</a> — bundled in the app but not active in version 1.0 (section 1.F); also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
         <li><a href="https://www.revenuecat.com/privacy">RevenueCat</a></li>
     </ul>
 
@@ -128,14 +130,14 @@
         <tr><td>Providing the app, generating cards, Cloud Sync, and managing your subscription</td><td>Performance of a contract (Art. 6(1)(b))</td></tr>
         <tr><td>Maintaining the shared translation collection so lookups are fast and affordable</td><td>Legitimate interests (Art. 6(1)(f))</td></tr>
         <tr><td>Crash reporting and diagnostics needed to keep the app working</td><td>Legitimate interests (Art. 6(1)(f))</td></tr>
-        <tr><td>Analytics and personalised advertising</td><td>Consent (Art. 6(1)(a)), where required by local law</td></tr>
+        <tr><td>Analytics, including the Advertising ID sent to Google and any advertising use Google makes of it</td><td>Consent (Art. 6(1)(a)), where required by local law</td></tr>
     </table>
     <p>You have the right to access, rectification, erasure, restriction of processing, data portability, and to object to processing carried out on the basis of legitimate interests — including profiling for advertising. Where we rely on consent, you may withdraw it at any time without affecting processing already carried out. You also have the right to lodge a complaint with your national supervisory authority.</p>
     <p>Our providers (Google and RevenueCat) process data outside the EEA and the UK, including in the United States. Those transfers rely on the transfer mechanisms operated by those providers, principally the European Commission's Standard Contractual Clauses and, where applicable, adequacy decisions such as the EU–US Data Privacy Framework.</p>
 
     <h3>California (CCPA / CPRA)</h3>
     <p>In the past twelve months we have collected the following categories of personal information: identifiers (Firebase UID, email address, display name, Advertising ID, IP address); commercial information (subscription and purchase history); internet or other network activity (in-app events, crash diagnostics); coarse geolocation inferred from IP address; and user-generated content (the words and phrases you enter). The sources, purposes, and recipients are described in section 1.</p>
-    <p><strong>We do not sell your personal information for money.</strong> However, allowing Google AdMob to serve personalised advertising may constitute "sharing" for cross-context behavioural advertising under the CPRA. You can stop this by turning off ad personalisation in your Android settings, or by subscribing to Full Experience, which removes advertising entirely. You may also contact us to opt out.</p>
+    <p><strong>We do not sell your personal information for money.</strong> Version 1.0 serves no advertising. However, the Advertising ID that Firebase Analytics sends to Google may still be used by Google for cross-context behavioural advertising, which may constitute "sharing" under the CPRA. You can stop this by turning off ad personalisation in your Android device settings — subscribing does not stop it, because it is driven by analytics rather than by ads. You may also contact us to opt out.</p>
     <p>You have the right to know, delete, and correct your personal information, to opt out of sharing for cross-context behavioural advertising, and not to be discriminated against for exercising these rights.</p>
 
     <h2>5. Children's Privacy</h2>
