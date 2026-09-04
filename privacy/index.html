@@ -27,7 +27,7 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> 2026-09-02</p>
+    <p><strong>Last updated:</strong> 2026-09-04</p>
 
     <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong> ("we", "us"). You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, how long we keep it, and what rights you have over it.</p>
 
@@ -48,7 +48,7 @@
     <p>How your cards are stored depends on whether you are signed in:</p>
     <ul>
         <li><strong>Without sign-in (default):</strong> Your cards and learning progress are stored only on your device, in a local database. They are not associated with any account on our servers, and uninstalling the app removes them.</li>
-        <li><strong>While signed in (Cloud Sync, Full Experience only):</strong> Your learning progress is also saved to <strong>Google Cloud Firestore</strong> under your Firebase UID. These records consist of references to entries in the shared collection described below, together with your progress data: your favourite and known flags, your sequential-known count, the group each card sits in on your lists and how many times you have swiped it, the number of entries you have imported, and the timestamps for when you added and last interacted with each card. Sync happens both immediately when you create or update a card and periodically in the background (roughly every six hours) via Android WorkManager, including when the app is not open.</li>
+        <li><strong>While signed in (Cloud Sync, Full Experience only):</strong> Your learning progress is also saved to <strong>Google Cloud Firestore</strong> under your Firebase UID. These records consist of references to entries in the shared collection described below, together with your progress data: your favourite and known flags, your sequential-known count, the group each card sits in on your lists and how many times you have swiped it, the number of entries you have imported, and the timestamps for when you added and last interacted with each card. Sync happens both immediately when you create or update a card and periodically in the background (currently about once a day) via Android WorkManager, including when the app is not open.</li>
     </ul>
 
     <p><strong>Shared translation collection — please read this carefully.</strong> When you look up a word or phrase that no one has looked up before in that language pair, we send it to Google's Gemini AI (see section C) and then store the result — <strong>including the original text you entered</strong> — in a collection in Cloud Firestore that is shared across all Tungly users. When another user later enters the same word in the same language pair, they are served your stored entry instead of us re-running the AI. This is what keeps the app fast and affordable to run.</p>
