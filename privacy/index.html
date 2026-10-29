@@ -25,7 +25,7 @@
 <body>
 
     <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> 2026-09-08</p>
+    <p><strong>Last updated:</strong> 2026-10-29</p>
 
     <p>We built the <strong>Tungly</strong> app (the "Service") as a tool to help you learn languages. This Service is provided by <strong>Isotropy</strong> ("we", "us"). You can use Tungly without creating an account; signing in with a Google account is optional and unlocks Cloud Sync as part of the Full Experience subscription. This policy explains what information we collect in either case, where it goes, how long we keep it, and what rights you have over it.</p>
 
@@ -60,6 +60,7 @@
 
     <h3>C. AI Processing (Google Gemini via Firebase AI)</h3>
     <p>When you enter a word or phrase for analysis, that text and your target language code are sent to <strong>Google's Gemini API</strong> (via Firebase AI Logic, using the Gemini Developer API) for processing. The model currently used is a Gemini Flash model. We do <strong>not</strong> send your account UID, email, or any other personal identifier alongside this request. The text is used to generate the learning card you requested, and the generated result is then stored in the shared collection described in section B.</p>
+    <p>To protect the translation service from abuse, every request to it carries a Firebase App Check token. On the app you install from Google Play, that token comes from Google Play's Play Integrity API, which checks that the app is the genuine Tungly app on a trustworthy device. For that check Google Play processes app metadata (package name, version and signing certificate), the app's licence status for the Google accounts on the device, and a device attestation token; Google states that this data is encrypted, not passed to third parties and deleted after a fixed retention period. Firebase does not retain the attestation material. The words and phrases you enter are not part of it.</p>
 
     <h3>D. Diagnostics and Usage (Firebase Crashlytics and Firebase Analytics)</h3>
     <p>To help us identify bugs and improve the app, we use:</p>
@@ -91,7 +92,7 @@
     <p>The app uses third-party services that may collect information used to identify you. Links to the privacy policies of these providers:</p>
     <ul>
         <li><a href="https://policies.google.com/privacy">Google Play Services</a></li>
-        <li><a href="https://firebase.google.com/support/privacy">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
+        <li><a href="https://firebase.google.com/support/privacy">Firebase</a> (Authentication, Cloud Firestore, Analytics, Crashlytics, App Check, Firebase AI / Gemini) — also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
         <li><a href="https://support.google.com/admob/answer/6128543">Google AdMob</a> — bundled in the app but not active in version 1.0 (section 1.F); also subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a></li>
         <li><a href="https://www.revenuecat.com/privacy">RevenueCat</a></li>
     </ul>
